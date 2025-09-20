@@ -1,0 +1,67 @@
+{
+  "name": "AEM Quick switch",
+  "version": "0.0.14.8",
+  "manifest_version": 3,
+  "description": "Astellas specific tool..",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "go-to-xf": {
+      "suggested_key": {
+        "default": "Alt+X"
+      },
+      "description": "Go to Experience Fragments (XF)"
+    },
+    "go-to-dam": {
+      "suggested_key": {
+        "default": "Alt+D"
+      },
+      "description": "Go to DAM (Digital Asset Management)"
+    },
+    "go-to-sites": {
+      "suggested_key": {
+        "default": "Alt+S"
+      },
+      "description": "Go to Sites Admin"
+    },
+    "go-to-page-properties": {
+      "description": "Go to Page Properties"
+    },
+    "view-as-published": {
+      "description": "View as Published"
+    },
+    "go-to-classic-ui": {
+      "description": "Go to Classic UI"
+    },
+    "go-to-editor": {
+      "description": "Go to Editor"
+    },
+    "switch-environment": {
+      "suggested_key": {
+        "default": "Alt+Q"
+      },
+      "description": "Switch between QA and Prod Environments"
+    }
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "devtools_page": "devtools.html",
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "contentScript.js"
+      ]
+    }
+  ]
+}
