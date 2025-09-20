@@ -1,155 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AEM Helper</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
-      /* Base styles for the body */
-      body {
-        font-family: "Playfair Display", serif;
-        margin: 0;
-        padding: 10px;
-        width: 250px;
-        background-color: #f4f4f4;
-        color: #333;
-      }
-      /* Main container for the popup layout */
-      .container {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-      /* Main heading style */
-      h2 {
-        font-size: 16px;
-        margin: 0;
-        padding: 5px 0;
-        border-bottom: 1px solid #ddd;
-      }
-      /* Styling for each section of the popup */
-      .section {
-        border: 1px solid #ccc;
-        padding: 10px;
-        border-radius: 5px;
-        background-color: #fff;
-      }
-      .section-title {
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
-      /* Flexbox layout for button groups */
-      .button-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px;
-      }
-      /* Individual button styling */
-      .button {
-        flex: 1 1 45%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        background-color: #e9e9e9;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 12px;
-        text-align: center;
-        transition: background-color 0.2s;
-      }
-      .button:hover {
-        background-color: #d4d4d4;
-      }
-      /* Styles for the environment status display */
-      .env-status {
-        font-size: 12px;
-        color: #555;
-        margin-top: 5px;
-        text-align: center;
-      }
-      .env-highlight {
-        font-weight: bold;
-        color: #007bff;
-      }
-      /* Styling for error messages */
-      .error {
-        color: red;
-        font-size: 12px;
-        text-align: center;
-        margin-top: 5px;
-      }
-      /* Creator name styling */
-      .creator {
-        font-size: 14px;
-        text-align: center;
-        margin-top: 12px;
-        font-weight: 700;
-        background: linear-gradient(
-          90deg,
-          #4285f4,
-          #ea4335,
-          #fbbc05,
-          #34a853,
-          #4285f4
-        );
-        background-size: 300% auto;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        color: transparent;
-        letter-spacing: 0.5px;
-        animation: gradient-move 6s linear infinite;
-      }
-
-      @keyframes gradient-move {
-        0% {
-          background-position: 0% center;
+        body {
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            padding: 10px;
+            width: 250px;
+            background-color: #f4f4f4;
+            color: #333;
         }
-        100% {
-          background-position: 100% center;
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
-      }
+        h2 {
+            font-size: 16px;
+            margin: 0;
+            padding: 5px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .section {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .button {
+            flex: 1 1 45%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            background-color: #e9e9e9;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            text-align: center;
+            transition: background-color 0.2s;
+        }
+        .button:hover {
+            background-color: #d4d4d4;
+        }
+        .env-status {
+            font-size: 12px;
+            color: #555;
+            margin-top: 5px;
+            text-align: center;
+        }
+        .env-highlight {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            text-align: center;
+            margin-top: 5px;
+        }
+        .creator {
+            font-size: 14px;
+            text-align: center;
+            margin-top: 12px;
+            font-weight: 700;
+            background: linear-gradient(
+                90deg,
+                #4285f4,
+                #ea4335,
+                #fbbc05,
+                #34a853,
+                #4285f4
+            );
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 0.5px;
+            animation: gradient-move 6s linear infinite;
+        }
+        @keyframes gradient-move {
+            0% {
+                background-position: 0% center;
+            }
+            100% {
+                background-position: 100% center;
+            }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="container">
-      <h2>AEM Helper</h2>
-      <div class="section">
-        <div class="section-title">Current Environment:</div>
-        <div id="env-status" class="env-status">Detecting...</div>
-      </div>
-      <div class="section">
-        <div class="section-title">Quick Navigation</div>
-        <div class="button-group">
-          <button class="button" id="xf-btn">XF (Alt+X)</button>
-          <button class="button" id="dam-btn">DAM (Alt+D)</button>
-          <button class="button" id="sites-btn">Sites (Alt+S)</button>
-          <button class="button" id="props-btn">Page Props</button>
-          <button class="button" id="published-btn">Published</button>
-          <button class="button" id="classic-btn">Classic UI</button>
-          <button class="button" id="editor-btn">Editor</button>
+        <h2>AEM Helper</h2>
+        <div class="section">
+            <div class="section-title">Current Environment:</div>
+            <div id="env-status" class="env-status">Detecting...</div>
         </div>
-      </div>
-      <div class="section">
-        <div class="section-title">Switch Environment</div>
-        <div class="button-group">
-          <button class="button" id="switch-env-btn">Switch (Alt+Q)</button>
+        <div class="section">
+            <div class="section-title">Quick Navigation</div>
+            <div class="button-group">
+                <button class="button" id="xf-btn">XF (Alt+X)</button>
+                <button class="button" id="dam-btn">DAM (Alt+D)</button>
+                <button class="button" id="sites-btn">Sites (Alt+S)</button>
+                <button class="button" id="forms-btn">Forms (Alt+F)</button>
+                <button class="button" id="props-btn">Page Props</button>
+                <button class="button" id="published-btn">Published</button>
+                <button class="button" id="editor-btn">Editor</button>
+            </div>
         </div>
-      </div>
-      <div class="section">
-        <div class="section-title">Keyboard Shortcuts</div>
-        <div class="button-group">
-          <button class="button" id="shortcuts-btn">Edit Shortcuts</button>
+        <div class="section">
+            <div class="section-title">Switch Tools</div>
+            <div class="button-group">
+                <button class="button" id="switch-env-btn">Switch Env (Alt+Q)</button>
+                <button class="button" id="toggle-ui-btn">Toggle UI</button>
+            </div>
         </div>
-      </div>
-      <div id="message" class="error"></div>
-      <div class="creator">Created by: UK Warriors</div>
+        <div class="section">
+            <div class="section-title">Keyboard Shortcuts</div>
+            <div class="button-group">
+                <button class="button" id="shortcuts-btn">Edit Shortcuts</button>
+            </div>
+        </div>
+        <div id="message" class="error"></div>
+        <div class="creator">Created by: Surender Nadar</div>
     </div>
     <script src="popup.js"></script>
-  </body>
+</body>
 </html>

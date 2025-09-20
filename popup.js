@@ -1,8 +1,7 @@
 // This script runs in the popup and handles UI interactions.
 
-// Event listener to run when the popup's HTML content is fully loaded.
 document.addEventListener('DOMContentLoaded', () => {
-    // Detect environment on load by querying the active tab.
+    // Detect environment on load
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         const url = tabs[0].url;
         const statusElement = document.getElementById('env-status');
@@ -35,11 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('xf-btn').addEventListener('click', () => sendMessageToBackground('go-to-xf'));
     document.getElementById('dam-btn').addEventListener('click', () => sendMessageToBackground('go-to-dam'));
     document.getElementById('sites-btn').addEventListener('click', () => sendMessageToBackground('go-to-sites'));
+    document.getElementById('forms-btn').addEventListener('click', () => sendMessageToBackground('go-to-forms'));
     document.getElementById('props-btn').addEventListener('click', () => sendMessageToBackground('go-to-page-properties'));
     document.getElementById('published-btn').addEventListener('click', () => sendMessageToBackground('view-as-published'));
-    document.getElementById('classic-btn').addEventListener('click', () => sendMessageToBackground('go-to-classic-ui'));
     document.getElementById('editor-btn').addEventListener('click', () => sendMessageToBackground('go-to-editor'));
     document.getElementById('switch-env-btn').addEventListener('click', () => sendMessageToBackground('switch-environment'));
+    document.getElementById('toggle-ui-btn').addEventListener('click', () => sendMessageToBackground('toggle-ui'));
 
     // Add event listener for the "Edit Shortcuts" button.
     document.getElementById('shortcuts-btn').addEventListener('click', () => {
@@ -49,7 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function sendMessageToBackground(command) {
     chrome.runtime.sendMessage({ command: command }, (response) => {
-        if (response && response.error) {
+        if (chrome.runtime.lastError) {
+            // Catches errors if the background script is busy or has an issue
+            console.error(chrome.runtime.lastError.message);
+        } else if (response && response.error) {
             const messageElement = document.getElementById('message');
             messageElement.textContent = response.error;
         }
