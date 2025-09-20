@@ -26,3 +26,12 @@ https://18.180.111.160/editor.html/content/padcev/hcp/global/global/en/home.html
 
 actual link:
 https://18.180.111.160/content/padcev/hcp/global/global/en/home.html?wcmmode=disabled
+
+Siteadmin link : https://18.180.111.160/siteadmin#/content/knowvms/hcp/est/gb/en and switching back from classic to touch UI is going to https://18.180.111.160/sites.html/
+
+fetch the exact form of the page - form is not shown in inspect elements as per my coding knowledge i would like you to deep dive through how can we fetch the path of forms inside page and while clicking customize shortcut it opens a specific forms path would be nice
+
+Open all in new Tab which is closer to the tab i am using like next tab not far away newtab
+
+
+
