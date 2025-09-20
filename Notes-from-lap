@@ -1,0 +1,20 @@
+While trying this editor https://18.180.111.160/editor.html/content/padcev/hcp/global/global/en/treatments-and-limitations.html
+
+sites: (kind of remove the last .html part, it will be working)
+https://18.180.111.160/sites.html/content/content/padcev/hcp/global/global/en/treatments-and-limitations.html
+
+XF: (the second content word doesn't come and the page name deson't require in XF so remove page name and .html too, add site in end removing that if possible)
+https://18.180.111.160/aem/experience-fragments.html/content/experience-fragments/content/padcev/hcp/global/global/en/treatments-and-limitations.html
+
+DAM:
+https://18.180.111.160/assets.html/content/dam
+
+
+Actual sites link: 
+https://18.180.111.160/sites.html/content/padcev/hcp/global/global/en
+
+Actual DAM link:
+https://18.180.111.160/assets.html/content/dam/padcev/hcp/global/global/en
+
+Actual XF link:
+https://18.180.111.160/aem/experience-fragments.html/content/experience-fragments/padcev/hcp/global/global/en/site
