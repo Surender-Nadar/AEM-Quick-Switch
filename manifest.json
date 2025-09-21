@@ -1,12 +1,13 @@
 {
-  "name": "AEM Quick switch",
-  "version": "0.0.15.0",
+  "name": "AEM Quick Switch",
+  "version": "0.0.16.0",
   "manifest_version": 3,
-  "description": "Astellas specific tool..",
+  "description": "Astellas specific tool with advanced features.",
   "permissions": [
     "activeTab",
     "storage",
-    "tabs"
+    "tabs",
+    "scripting"
   ],
   "background": {
     "service_worker": "background.js"
@@ -30,11 +31,8 @@
       },
       "description": "Go to Sites Admin"
     },
-     "go-to-forms": {
-      "suggested_key": {
-        "default": "Alt+F"
-      },
-      "description": "Go to Forms"
+    "go-to-forms": {
+      "description": "Go to Forms (Context-Aware)"
     },
     "go-to-page-properties": {
       "description": "Go to Page Properties"
@@ -58,8 +56,6 @@
   "action": {
     "default_popup": "popup.html"
   },
-  "devtools_page": "devtools.html",
-  "options_page": "options.html",
   "content_scripts": [
     {
       "matches": [

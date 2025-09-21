@@ -1,60 +1,58 @@
-// This script runs in the popup and handles UI interactions.
+// This script runs in the popup and handles all UI interactions.
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Detect environment on load
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        const url = tabs[0].url;
-        const statusElement = document.getElementById('env-status');
-        const messageElement = document.getElementById('message');
+document.addEventListener("DOMContentLoaded", () => {
+  const enableToggle = document.getElementById("enable-toggle");
 
-        const ENVIRONMENT_CONFIG = {
-            'qa': { 'patterns': ['author-astellas-qa-65.adobecqms.net', 'author1apnortheast1-b80.qa.astellas.adobecqms.net', '18.180.111.160'] },
-            'prod': { 'patterns': ['author-astellas-prod-65.adobecqms.net', 'author1useast1-b80.prod-65.astellas.adobecqms.net', '54.243.158.24'] }
-        };
+  // Load saved state for the toggle
+  chrome.storage.local.get(["extensionEnabled"], (result) => {
+    enableToggle.checked = result.extensionEnabled !== false; // default to true
+  });
 
-        let currentEnv = null;
-        for (const env in ENVIRONMENT_CONFIG) {
-            if (ENVIRONMENT_CONFIG[env].patterns.some(pattern => url.includes(pattern))) {
-                currentEnv = env;
-                statusElement.innerHTML = `Current: <span class="env-highlight">${currentEnv.toUpperCase()}</span>`;
-                break;
-            }
-        }
+  // Save toggle state on change
+  enableToggle.addEventListener("change", () => {
+    chrome.storage.local.set({ extensionEnabled: enableToggle.checked });
+  });
 
-        if (!currentEnv) {
-            statusElement.textContent = 'AEM not detected';
-            messageElement.textContent = 'Please navigate to an AEM page.';
-            document.querySelectorAll('.button').forEach(btn => btn.disabled = true);
-        } else {
-            document.querySelectorAll('.button').forEach(btn => btn.disabled = false);
-        }
+  // Add event listeners for all command buttons
+  const commandButtons = {
+    "xf-btn": "go-to-xf",
+    "dam-btn": "go-to-dam",
+    "sites-btn": "go-to-sites",
+    "forms-btn": "go-to-forms",
+    "props-btn": "go-to-page-properties",
+    "published-btn": "view-as-published",
+    "editor-btn": "go-to-editor",
+    "switch-env-btn": "switch-environment",
+    "toggle-ui-btn": "toggle-ui",
+  };
+
+  for (const [id, command] of Object.entries(commandButtons)) {
+    document.getElementById(id).addEventListener("click", () => {
+      if (enableToggle.checked) {
+        // Note: The new background script expects a different message format for commands
+        // This will be updated in the next step to align with the new background.js
+        chrome.runtime.sendMessage({
+          command: "triggerCommand",
+          commandName: command,
+        });
+      }
     });
+  }
 
-    // Add event listeners for all navigation buttons.
-    document.getElementById('xf-btn').addEventListener('click', () => sendMessageToBackground('go-to-xf'));
-    document.getElementById('dam-btn').addEventListener('click', () => sendMessageToBackground('go-to-dam'));
-    document.getElementById('sites-btn').addEventListener('click', () => sendMessageToBackground('go-to-sites'));
-    document.getElementById('forms-btn').addEventListener('click', () => sendMessageToBackground('go-to-forms'));
-    document.getElementById('props-btn').addEventListener('click', () => sendMessageToBackground('go-to-page-properties'));
-    document.getElementById('published-btn').addEventListener('click', () => sendMessageToBackground('view-as-published'));
-    document.getElementById('editor-btn').addEventListener('click', () => sendMessageToBackground('go-to-editor'));
-    document.getElementById('switch-env-btn').addEventListener('click', () => sendMessageToBackground('switch-environment'));
-    document.getElementById('toggle-ui-btn').addEventListener('click', () => sendMessageToBackground('toggle-ui'));
-
-    // Add event listener for the "Edit Shortcuts" button.
-    document.getElementById('shortcuts-btn').addEventListener('click', () => {
-        chrome.tabs.create({ url: 'chrome://extensions/shortcuts' });
+  // Environment buttons
+  document.querySelectorAll(".env-button").forEach((button) => {
+    button.addEventListener("click", () => {
+      if (enableToggle.checked) {
+        chrome.runtime.sendMessage({
+          command: "openUrl",
+          url: button.dataset.url,
+        });
+      }
     });
+  });
+
+  // Shortcuts button
+  document.getElementById("shortcuts-btn").addEventListener("click", () => {
+    chrome.tabs.create({ url: "chrome://extensions/shortcuts" });
+  });
 });
-
-function sendMessageToBackground(command) {
-    chrome.runtime.sendMessage({ command: command }, (response) => {
-        if (chrome.runtime.lastError) {
-            // Catches errors if the background script is busy or has an issue
-            console.error(chrome.runtime.lastError.message);
-        } else if (response && response.error) {
-            const messageElement = document.getElementById('message');
-            messageElement.textContent = response.error;
-        }
-    });
-}

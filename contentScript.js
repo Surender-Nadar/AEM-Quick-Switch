@@ -1,5 +1,4 @@
-// This content script is injected into every page as defined in the manifest.json.
-// It serves as a communication bridge between the background script and the webpage's DOM.
-// Currently, it's a minimal script designed to work in tandem with the background service worker.
+// This content script is essential for features that need to interact with the page DOM,
+// such as the intelligent form detection.
 
-console.log("AEM Quick Switch: Content script loaded.");
+console.log("AEM Quick Switch: Content script loaded and ready.");
