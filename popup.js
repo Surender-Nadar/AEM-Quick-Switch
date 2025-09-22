@@ -1,46 +1,53 @@
-// This script runs in the popup and handles all UI interactions.
+// AEM SWIFT NAV - Popup UI Script
 
 document.addEventListener("DOMContentLoaded", () => {
   const enableToggle = document.getElementById("enable-toggle");
 
-  // Load saved state for the toggle
+  // Load and set toggle state
   chrome.storage.local.get(["extensionEnabled"], (result) => {
-    enableToggle.checked = result.extensionEnabled !== false; // default to true
+    enableToggle.checked = result.extensionEnabled !== false;
   });
 
-  // Save toggle state on change
   enableToggle.addEventListener("change", () => {
     chrome.storage.local.set({ extensionEnabled: enableToggle.checked });
   });
 
-  // Add event listeners for all command buttons
-  const commandButtons = {
-    "xf-btn": "go-to-xf",
-    "dam-btn": "go-to-dam",
-    "sites-btn": "go-to-sites",
-    "forms-btn": "go-to-forms",
-    "props-btn": "go-to-page-properties",
-    "published-btn": "view-as-published",
-    "editor-btn": "go-to-editor",
-    "switch-env-btn": "switch-environment",
-    "toggle-ui-btn": "toggle-ui",
-  };
+  // Dynamically display shortcuts
+  chrome.commands.getAll((commands) => {
+    for (const command of commands) {
+      const shortcutEl = document.getElementById(`${command.name}-sc`);
+      if (shortcutEl && command.shortcut) {
+        shortcutEl.textContent = command.shortcut;
+      }
+    }
+  });
 
-  for (const [id, command] of Object.entries(commandButtons)) {
+  // Add event listeners for all command buttons
+  const commandButtons = [
+    "go-to-sites",
+    "go-to-dam",
+    "go-to-xf",
+    "go-to-forms",
+    "go-to-page-properties",
+    "view-as-published",
+    "go-to-editor",
+    "toggle-ui",
+    "switch-environment",
+  ];
+
+  commandButtons.forEach((id) => {
     document.getElementById(id).addEventListener("click", () => {
       if (enableToggle.checked) {
-        // Note: The new background script expects a different message format for commands
-        // This will be updated in the next step to align with the new background.js
         chrome.runtime.sendMessage({
           command: "triggerCommand",
-          commandName: command,
+          commandName: id,
         });
       }
     });
-  }
+  });
 
-  // Environment buttons
-  document.querySelectorAll(".env-button").forEach((button) => {
+  // Login environment buttons
+  document.querySelectorAll("[data-url]").forEach((button) => {
     button.addEventListener("click", () => {
       if (enableToggle.checked) {
         chrome.runtime.sendMessage({
@@ -51,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Shortcuts button
+  // "Edit All" shortcuts button
   document.getElementById("shortcuts-btn").addEventListener("click", () => {
     chrome.tabs.create({ url: "chrome://extensions/shortcuts" });
   });

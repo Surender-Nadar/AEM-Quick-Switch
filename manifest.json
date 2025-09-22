@@ -1,55 +1,37 @@
 {
-  "name": "AEM Quick Switch",
-  "version": "0.0.16.0",
+  "name": "AEM SWIFT NAV",
+  "version": "2.0.0",
   "manifest_version": 3,
-  "description": "Astellas specific tool with advanced features.",
-  "permissions": [
-    "activeTab",
-    "storage",
-    "tabs",
-    "scripting"
-  ],
+  "description": "The ultimate AEM productivity tool with intelligent navigation, environment management, and dynamic shortcuts.",
+  "permissions": ["activeTab", "storage", "tabs", "scripting", "commands"],
+  "icons": {
+    "16": "aem-swift-nav-icon.png",
+    "48": "aem-swift-nav-icon.png",
+    "128": "aem-swift-nav-icon.png"
+  },
   "background": {
     "service_worker": "background.js"
   },
   "commands": {
     "go-to-xf": {
-      "suggested_key": {
-        "default": "Alt+X"
-      },
+      "suggested_key": { "default": "Alt+X" },
       "description": "Go to Experience Fragments (XF)"
     },
     "go-to-dam": {
-      "suggested_key": {
-        "default": "Alt+D"
-      },
+      "suggested_key": { "default": "Alt+D" },
       "description": "Go to DAM"
     },
     "go-to-sites": {
-      "suggested_key": {
-        "default": "Alt+S"
-      },
+      "suggested_key": { "default": "Alt+S" },
       "description": "Go to Sites Admin"
     },
-    "go-to-forms": {
-      "description": "Go to Forms (Context-Aware)"
-    },
-    "go-to-page-properties": {
-      "description": "Go to Page Properties"
-    },
-    "view-as-published": {
-      "description": "View as Published"
-    },
-    "go-to-editor": {
-      "description": "Go to Editor"
-    },
-    "toggle-ui": {
-      "description": "Toggle between Classic and Touch UI"
-    },
+    "go-to-forms": { "description": "Go to Forms (Context-Aware)" },
+    "go-to-page-properties": { "description": "Go to Page Properties" },
+    "view-as-published": { "description": "View as Published" },
+    "go-to-editor": { "description": "Go to Editor" },
+    "toggle-ui": { "description": "Toggle between Classic and Touch UI" },
     "switch-environment": {
-      "suggested_key": {
-        "default": "Alt+Q"
-      },
+      "suggested_key": { "default": "Alt+Q" },
       "description": "Switch between QA and Prod Environments"
     }
   },
@@ -58,12 +40,8 @@
   },
   "content_scripts": [
     {
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": [
-        "contentScript.js"
-      ]
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"]
     }
   ]
 }
