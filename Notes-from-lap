@@ -34,4 +34,51 @@ fetch the exact form of the page - form is not shown in inspect elements as per 
 Open all in new Tab which is closer to the tab i am using like next tab not far away newtab
 
 
+QA Login:
+IP Login link: https://18.180.111.160/libs/granite/core/content/login.html
 
+b80 Login link: https://author1apnortheast1-b80.qa.astellas.adobecqms.net/libs/granite/core/content/login.html
+
+qa-65 Login link : https://author-astellas-qa-65.adobecqms.net/libs/granite/core/content/login.html
+
+PROD login:
+
+https://54.243.158.24/libs/granite/core/content/login.html
+
+https://author1useast1-b80.prod-65.astellas.adobecqms.net/libs/granite/core/content/login.html
+
+https://author-astellas-prod-65.adobecqms.net/libs/granite/core/content/login.html
+
+
+from view as oublished to ediot mode it appears url as https://18.180.111.160/editor.htmlcontent/padcev/hcp/global/global/en/treatments-and-limitations.html where we need / before content to work
+correct link is https://18.180.111.160/editor.html/content/padcev/hcp/global/global/en/treatments-and-limitations.html
+
+shifting from site to siteadmin i.e touch UI to classic we see this link: https://18.180.111.160/siteadmin#/content/content/padcev/hcp/global/global/en
+actual correct link is https://18.180.111.160/siteadmin#/content/content/padcev/hcp/global/global/en
+
+
+while clicking on page properties of this https://18.180.111.160/editor.html/content/padcev/hcp/global/global/en/treatments-and-limitations.html,
+shortcut it is leading to this page https://18.180.111.160/mnt/overlay/wcm/core/content/sites/properties.html?item=/editor
+
+actual page for page properties is this https://18.180.111.160/mnt/overlay/wcm/core/content/sites/properties.html?item=/content/padcev/hcp/global/global/en/treatments-and-limitations
+
+Quick Navigation
+XF
+DAM
+Sites
+Forms
+Props
+Published
+Editor
+Toggle UI
+Switch Env
+let them be shown with shortcuts already set in hotkeys as well as the shortcuts they are setting in feature eith their shortcuts set in extension shortcut for everyone they might be different so let's sync the details of shortcuts of their in the AEM extension UI
+
+Let the shortcuts should be active in the aem Tab only not on all tabs, lets fetch the url staring with these like QA's three url and Prod's three url will only be active for the aem quick switch exntension, so will stick to that so no other browsers shortcuts doesn't get interuppeted, Will provide the detection of is it aem env ironment or not as we previously had
+
+WHy the name AEM helper inside as our tool name is AEM Quick switch what will do, will completely change our tool too "AEM SWIFT NAV" in tool, no previous names, inside and outside should be same new name given as "AEM SWIFT NAV" 
+and for the Image logo in extension it is shown as letter A let's change that too as will keep a image, i'm attaching the image for that.
+
+lets have the background of extension UI with like sdakr night sky with stars and adjust the internal words and color of that and make the name of myself that is urender nadar more attractive in css
+
+let's all sink in for prod i guess we have made all these change for the prod envirment too from the start to now adding these and fixing issues
